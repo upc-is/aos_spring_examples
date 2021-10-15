@@ -3,6 +3,7 @@ package com.acme.learningcenter.learning.domain.model.entity;
 import com.acme.learningcenter.shared.domain.model.AuditModel;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ public class Post extends AuditModel {
 
     @NotNull
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String content;
 
 }
