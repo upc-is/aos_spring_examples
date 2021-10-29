@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,4 +40,6 @@ public class Post extends AuditModel {
     @Type(type = "org.hibernate.type.TextType")
     private String content;
 
+    @OneToMany
+    private List<Comment> comments;
 }

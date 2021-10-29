@@ -5,6 +5,7 @@ import com.acme.learningcenter.learning.mapping.PostMapper;
 import com.acme.learningcenter.learning.resource.CreatePostResource;
 import com.acme.learningcenter.learning.resource.PostResource;
 import com.acme.learningcenter.learning.resource.UpdatePostResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +18,11 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/posts")
 public class PostsController {
 
-    private final PostService postService;
+    @Autowired
+    private PostService postService;
 
-    private final PostMapper mapper;
-
-
-    public PostsController(PostService postService, PostMapper mapper) {
-        this.postService = postService;
-        this.mapper = mapper;
-    }
+    @Autowired
+    private PostMapper mapper;
 
     @GetMapping
     public Page<PostResource> getAllPosts(Pageable pageable) {
@@ -33,7 +30,7 @@ public class PostsController {
     }
 
     @GetMapping("{postId}")
-    public PostResource getPostById(@PathVariable Long postId) {
+    public PostResource getPostById(@PathVariable("postId") Long postId) {
         return mapper.toResource(postService.getById(postId));
     }
 

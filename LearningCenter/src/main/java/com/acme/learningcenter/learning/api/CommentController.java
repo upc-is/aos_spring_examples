@@ -42,6 +42,12 @@ public class CommentController {
                                          @RequestBody UpdateCommentResource request) {
         return mapper.toResource(commentService.update(postId, commentId, mapper.toModel(request)));
     }
+    @GetMapping("{commentId}")
+    public CommentResource getCommentById(@PathVariable("postId") Long postId,
+            @PathVariable("commentId") Long commentId) {
+        return mapper.toResource(commentService.getByIdAndPostId(postId, commentId));
+    }
+
 
     @DeleteMapping("{commentId}")
     public ResponseEntity<?> deleteComment(@PathVariable Long postId,

@@ -30,7 +30,7 @@ public class PostServiceImpl implements PostService {
         this.validator = validator;
     }
 
-    @Override
+
     public List<Post> getAll() {
         return postRepository.findAll();
     }
@@ -48,43 +48,33 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post create(Post request) {
-
         Set<ConstraintViolation<Post>> violations = validator.validate(request);
-
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
         return postRepository.save(request);
-
     }
 
     @Override
     public Post update(Long postId, Post request) {
 
         Set<ConstraintViolation<Post>> violations = validator.validate(request);
-
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
         return postRepository.findById(postId).map(post ->
-                        postRepository.save(
-                                post.withTitle(request.getTitle())
-                                    .withDescription(request.getDescription())
-                                    .withContent(request.getContent())))
-                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, postId));
-
+                postRepository.save(
+                    post.withTitle(request.getTitle())
+                        .withDescription(request.getDescription())
+                        .withContent(request.getContent()))
+            ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, postId));
     }
 
     @Override
     public ResponseEntity<?> delete(Long postId) {
-
-        return postRepository.findById(postId)
-                .map(post -> {
-            postRepository.delete(post);
-            return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, postId));
-
+        return postRepository.findById(postId).map(post -> {
+                postRepository.delete(post);
+                return ResponseEntity.ok().build();
+            }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, postId));
     }
-
-
 }

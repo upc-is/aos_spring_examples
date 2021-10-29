@@ -6,6 +6,7 @@ import com.acme.learningcenter.learning.domain.persistence.PostRepository;
 import com.acme.learningcenter.learning.domain.service.CommentService;
 import com.acme.learningcenter.shared.exception.ResourceNotFoundException;
 import com.acme.learningcenter.shared.exception.ResourceValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +22,14 @@ public class CommentServiceImpl implements CommentService {
 
     private static final String ENTITY = "Comment";
 
-    private final CommentRepository commentRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
-    private final PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-    private final Validator validator;
-
-    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, Validator validator) {
-        this.commentRepository = commentRepository;
-        this.postRepository = postRepository;
-        this.validator = validator;
-    }
+    @Autowired
+    private Validator validator;
 
     @Override
     public List<Comment> getAllByPostId(Long postId) {
@@ -51,9 +49,9 @@ public class CommentServiceImpl implements CommentService {
             throw new ResourceValidationException(ENTITY, violations);
 
         return postRepository.findById(postId).map(post -> {
-            request.setPost(post);
-            return commentRepository.save(request);
-        }).orElseThrow(() -> new ResourceNotFoundException("Post", postId ));
+                request.setPost(post);
+                return commentRepository.save(request);
+            }).orElseThrow(() -> new ResourceNotFoundException("Post", postId ));
     }
 
     @Override
@@ -68,8 +66,8 @@ public class CommentServiceImpl implements CommentService {
             throw new ResourceNotFoundException("Post", postId);
 
         return commentRepository.findById(commentId).map(comment ->
-                commentRepository.save(comment.withText(request.getText())))
-                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, commentId));
+                commentRepository.save(comment.withText(request.getText()))
+           ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, commentId));
 
     }
 
@@ -77,9 +75,15 @@ public class CommentServiceImpl implements CommentService {
     public ResponseEntity<?> delete(Long postId, Long commentId) {
 
         return commentRepository.findByIdAndPostId(commentId, postId).map(comment -> {
-            commentRepository.delete(comment);
-            return ResponseEntity.ok().build();})
-                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, commentId));
+                commentRepository.delete(comment);
+                return ResponseEntity.ok().build();
+            }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, commentId));
 
+    }
+
+    @Override
+    public Comment getByIdAndPostId(Long postId, Long commentId) {
+        return commentRepository.findByIdAndPostId(commentId, postId)
+                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, commentId));
     }
 }
