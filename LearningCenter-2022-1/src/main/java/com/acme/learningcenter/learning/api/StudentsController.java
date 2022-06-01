@@ -33,7 +33,7 @@ public class StudentsController {
     }
 
     @PostMapping
-    public StudentResource createStudent(@RequestBody CreateStudentResource resource) {
+    public StudentResource createStudent(@CookieValue @RequestBody CreateStudentResource resource) {
         return mapper.toResource(studentService.create(mapper.toModel(resource)));
     }
 
