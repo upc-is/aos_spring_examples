@@ -1,5 +1,8 @@
 package pe.edu.upc.prueba.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -9,6 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "students")
+@Data
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +34,7 @@ public class Student {
     @Column(name = "average", nullable = false)
     private Float average;
 
-    @Column(name = "level", nullable = false, columnDefinition = "MONEY")
+    @Column(name = "level", nullable = false)//, columnDefinition = "MONEY")
     private Integer level;
 
     @Min(value = 0)
@@ -41,6 +45,7 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "career_id")
+    @JsonIgnoreProperties(value = "students")
     private Career career;
     /*private Campus campus;
     private List<Matricula> matriculas;*/

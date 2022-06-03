@@ -1,5 +1,6 @@
 package pe.edu.upc.prueba.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class Career {
 
     @ManyToOne
     @JoinColumn(name = "campus_id")
+    @JsonIgnoreProperties(value = "careers")
     private Campus campus;
     /*private List<Course> courses;
     private List<Matricula> matriculas;*/

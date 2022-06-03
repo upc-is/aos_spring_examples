@@ -1,0 +1,13 @@
+Insert into campuses (name) values ('San Isidro');
+Insert into campuses (name) values ('San Miguel');
+
+Insert into careers (name, campus_id) values ('Ingenieria de software', 1);
+Insert into careers (name, campus_id) values ('Ingenieria de Sistemas de Inf.', 1);
+Insert into careers (name, campus_id) values ('Ingenieria de software', 2);
+Insert into careers (name, campus_id) values ('Ingenieria de Sistemas de Inf.', 2);
+
+
+insert into students (age, average, birth_day, first_name, last_name, level, career_id)  Values
+(20, 15.6, '2022-06-03', 'RICARDO', 'CHURA MOLINA', 5, 1);
+insert into students (age, average, birth_day, first_name, last_name, level, career_id)  Values
+(30, 13.6, '1999-06-03', 'ROSA MARIA', 'SANTOS PEREZ', 8, 2);
