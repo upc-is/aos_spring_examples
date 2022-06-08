@@ -63,7 +63,8 @@ public class StudentController {
         } else
         {   // Faltan las demas validaciones
             studentService.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            //return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return ResponseEntity.accepted().build();   // Lambda
         }
     }
 }
