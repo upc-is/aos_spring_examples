@@ -16,7 +16,7 @@ public class NotFoundException extends RuntimeException{
     public NotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
-    public NotFoundException(String resourceName, Long resourceId) {
+    public NotFoundException(String resourceName, Integer resourceId) {
         super(String.format("%s with id %d not found.", resourceName, resourceId));
     }
 }

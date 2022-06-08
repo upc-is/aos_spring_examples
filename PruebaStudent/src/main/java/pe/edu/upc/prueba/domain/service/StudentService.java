@@ -12,4 +12,5 @@ public interface StudentService {
     List<Student> getAll();
     Optional<Student> getById(Integer id);
     void deleteById(Integer id);
+    boolean existsById(Integer id);
 }

@@ -1,10 +1,14 @@
 package pe.edu.upc.prueba.api;
 
 import lombok.AllArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.prueba.domain.model.entity.Student;
 import pe.edu.upc.prueba.domain.service.StudentService;
+import pe.edu.upc.prueba.shared.exception.NotFoundException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,16 +30,40 @@ public class StudentController {
 
     @GetMapping("{id}") //  /students/{id}
     public Student getById(@PathVariable("id") Integer id) {
-        Optional<Student> optional = studentService.getById(id);
-        if (optional.isPresent())
+        if (!studentService.existsById(id)) {
+            throw new NotFoundException("Student", id);
+        } else {
+            Optional<Student> optional = studentService.getById(id);
             return optional.get();
-        else
-            return optional.get();
+        }
+    }
+    @PutMapping("{id}")
+    public Student updateById(@PathVariable("id") Integer id,
+                              @RequestBody Student student) {
+        if (!studentService.existsById(id)) {
+            throw new NotFoundException("Student", id);
+        } else
+        {   // Faltan las demas validaciones
+            return studentService.update(student);
+        }
     }
 
     @PostMapping
-    public Student createStudent(@Valid @RequestBody Student student) {
+    public ResponseEntity<?> createStudent(@RequestBody Student student) {
+        // Faltan validaciones
+        Student studentResponse = studentService.create(student);
+        return new ResponseEntity<>(studentResponse, HttpStatus.CREATED);
+    }
 
-        return null;
+    @DeleteMapping("{id}")
+
+    public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
+        if (!studentService.existsById(id)) {
+            throw new NotFoundException("Student", id);
+        } else
+        {   // Faltan las demas validaciones
+            studentService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
     }
 }

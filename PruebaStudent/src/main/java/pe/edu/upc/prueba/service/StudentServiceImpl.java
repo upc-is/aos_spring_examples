@@ -45,4 +45,10 @@ public class StudentServiceImpl implements StudentService {
     public void deleteById(Integer id) {
         studentRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsById(Integer id) {
+        return studentRepository.existsById(id);
+    }
+
 }
