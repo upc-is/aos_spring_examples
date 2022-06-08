@@ -40,7 +40,7 @@ public class Student {
     @Min(value = 0)
     @Max(value = 120)
     @NotNull
-    @Column(name = "age", nullable = false, columnDefinition = "TINYINT")
+    @Column(name = "age", nullable = false)
     private Integer age;
 
     @ManyToOne
