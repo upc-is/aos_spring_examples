@@ -117,12 +117,12 @@ public class UserServiceImpl implements UserService {
             Set<Role> roles = new HashSet<>();
 
             if (rolesStringSet == null) {
-                roleRepository.findByName(Roles.ROLE_USER)
+                roleRepository.findByName("ROLE_USER")
                         .map(roles::add)
                         .orElseThrow(() -> new RuntimeException("Role not found."));
             } else {
                 rolesStringSet.forEach(roleString ->
-                        roleRepository.findByName(Roles.valueOf(roleString))
+                        roleRepository.findByName(roleString)
                                 .map(roles::add)
                                 .orElseThrow(() -> new RuntimeException("Role not found.")));
             }

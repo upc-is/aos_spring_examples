@@ -19,12 +19,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void seed() {
-        Arrays.stream(DEFAULT_ROLES).forEach(name -> {
+        /*Arrays.stream(DEFAULT_ROLES).forEach(name -> {
             Roles roleName = Roles.valueOf(name);
             if(!roleRepository.existsByName(roleName)) {
                 roleRepository.save((new Role()).withName(roleName));
             }
-        } );
+        } );*/
 
     }
 

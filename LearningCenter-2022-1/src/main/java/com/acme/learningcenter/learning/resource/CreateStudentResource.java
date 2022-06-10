@@ -3,6 +3,7 @@ package com.acme.learningcenter.learning.resource;
 
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,6 +19,9 @@ public class CreateStudentResource {
     @NotBlank
     @Size(max = 60)
     private String name;
+
+    @Min(18)
+    private int age;
 
     @Size(max = 240)
     private String address;

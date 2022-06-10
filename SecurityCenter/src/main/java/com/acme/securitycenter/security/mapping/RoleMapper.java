@@ -20,7 +20,7 @@ public class RoleMapper implements Serializable {
     @Autowired
     EnhancedModelMapper mapper;
 
-    Converter<Roles, String> roleToString = new AbstractConverter<>() {
+    Converter<Roles, String> roleToString = new AbstractConverter<Roles, String>() {
         @Override
         protected String convert(Roles role) {
             return role == null ? null : role.name();

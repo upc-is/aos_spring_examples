@@ -26,6 +26,7 @@ public class Student extends AuditModel {
     @Column(unique = true)
     private String name;
 
+    @Column
     private int age;
 
     @Size(max = 240)

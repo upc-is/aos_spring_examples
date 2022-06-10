@@ -10,5 +10,6 @@ import lombok.*;
 public class StudentResource {
     private Long id;
     private String name;
+    private int age;
     private String address;
 }
