@@ -6,6 +6,7 @@ import com.acme.learningcenter.learning.resource.TeacherResource;
 import com.acme.learningcenter.shared.mapping.EnhancedModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.xml.validation.Validator;
 import java.io.Serializable;
 
 public class TeacherMapper implements Serializable {
@@ -14,6 +15,7 @@ public class TeacherMapper implements Serializable {
   EnhancedModelMapper mapper;
 
   public Teacher toModel(CreateTeacherResource resource) {
+
     return mapper.map(resource, Teacher.class);
   }
 

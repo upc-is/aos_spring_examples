@@ -1,9 +1,9 @@
 package com.acme.learningcenter.learning.service;
 
-import com.acme.learningcenter.learning.domain.model.entity.Student;
 import com.acme.learningcenter.learning.domain.model.entity.Teacher;
 import com.acme.learningcenter.learning.domain.persistence.TeacherRepository;
 import com.acme.learningcenter.learning.domain.service.TeacherService;
+import com.acme.learningcenter.shared.exception.ConflictException;
 import com.acme.learningcenter.shared.exception.ResourceValidationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,8 +38,7 @@ public class TeacherServiceImpl implements TeacherService {
     // Dni Uniqueness validation
     Teacher teacherWithDni = teacherRepository.findByDni(teacher.getDni());
     if (teacherWithDni != null) {
-      throw new ResourceValidationException(ENTITY,
-              "An teacher with the same dni already exists.");
+      throw new ConflictException(ENTITY, teacherWithDni.getDni());
     }
 
     return teacherRepository.save(teacher);

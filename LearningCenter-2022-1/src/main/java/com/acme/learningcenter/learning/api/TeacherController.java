@@ -7,6 +7,7 @@ import com.acme.learningcenter.learning.mapping.StudentMapper;
 import com.acme.learningcenter.learning.mapping.TeacherMapper;
 import com.acme.learningcenter.learning.resource.CreateTeacherResource;
 import com.acme.learningcenter.learning.resource.TeacherResource;
+import com.acme.learningcenter.shared.exception.TeacherResourceValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

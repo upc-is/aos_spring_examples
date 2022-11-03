@@ -26,6 +26,6 @@ public class CreateTeacherResource {
   private String carrera;
 
   @NotBlank
-  @Size(max = 8)
+  @Size(max = 8, min = 8)
   private String dni;
 }

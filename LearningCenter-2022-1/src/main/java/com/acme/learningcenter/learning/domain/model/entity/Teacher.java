@@ -4,6 +4,7 @@ import com.acme.learningcenter.shared.domain.model.AuditModel;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,12 +28,13 @@ public class Teacher extends AuditModel {
   private String name;
 
   @Column
+  @Min(18)
   private int age;
 
   @Size(max = 100)
   private String carrera;
 
   @NotBlank
-  @Size(max = 8)
+  @Size(max = 8, min = 8)
   private String dni;
 }
