@@ -1,19 +1,14 @@
 package com.acme.learningcenter.learning.resource;
 
 import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
 
 @Getter
 @Setter
 @With
 @NoArgsConstructor
 @AllArgsConstructor
-public class CriterionResource {
+public class SkillResourceId {
 
     private Long id;
-
-    private String name;
-
-    private SkillResource skill;
 
 }

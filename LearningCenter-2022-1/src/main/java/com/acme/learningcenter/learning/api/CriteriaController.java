@@ -1,8 +1,10 @@
 package com.acme.learningcenter.learning.api;
 
+import com.acme.learningcenter.learning.domain.model.entity.Criterion;
 import com.acme.learningcenter.learning.domain.service.CriterionService;
 import com.acme.learningcenter.learning.mapping.CriterionMapper;
 import com.acme.learningcenter.learning.resource.CriterionResource;
+import com.acme.learningcenter.learning.resource.CriterionResourceId;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @SecurityRequirement(name = "acme")
 @RestController
@@ -28,7 +32,10 @@ public class CriteriaController {
 
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
-    public Page<CriterionResource> getAllCriteria(Pageable pageable) {
+    /*public Page<CriterionResource> getAllCriteria(Pageable pageable) {
         return mapper.modelListPage(criterionService.getAll(), pageable);
+    }*/
+    public Page<CriterionResourceId> getAllCriteria(Pageable pageable) {
+        return mapper.modelListPageId(criterionService.getAll(), pageable);
     }
 }

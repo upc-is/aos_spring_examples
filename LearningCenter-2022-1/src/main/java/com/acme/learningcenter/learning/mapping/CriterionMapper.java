@@ -23,6 +23,9 @@ public class CriterionMapper implements Serializable {
     public Page<CriterionResource> modelListPage(List<Criterion> modelList, Pageable pageable) {
         return new PageImpl<>(mapper.mapList(modelList, CriterionResource.class), pageable, modelList.size());
     }
+    public Page<CriterionResourceId> modelListPageId(List<Criterion> modelList, Pageable pageable) {
+        return new PageImpl<>(mapper.mapList(modelList, CriterionResourceId.class), pageable, modelList.size());
+    }
 
     public Criterion toModel(CreateCriterionResource resource) {
         return mapper.map(resource, Criterion.class);

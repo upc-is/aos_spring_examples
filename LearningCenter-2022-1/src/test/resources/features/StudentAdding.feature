@@ -4,7 +4,7 @@ Feature: Student Adding
   So that It can be available to applications.
 
   Background:
-    Given The Endpoint "http://localhost:%d/api/v1/students" is available
+    Given The Endpoint "http://localhost:8098/api/v1/students" is available
 
     @student-adding
     Scenario: Add Student
